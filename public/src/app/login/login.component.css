@@ -1,0 +1,39 @@
+#bookshelves{
+    height:100%;
+    width:100%;
+    display:inline-block;
+}
+
+#input{
+    width:100%;
+    height:100%;
+    max-width:250px;
+    display:inline-block;
+    padding:10px;
+    background-color:#f4b58a;
+}
+
+#name{
+    font-weight:bolder;
+    color:#ca0a5a;
+}
+
+.label{
+    color:#01288a;
+}
+
+.title{
+    color:#013b4e;
+    margin-top:10px;
+}
+
+.error{
+    color:red;
+    font-weight:bold;
+}
+
+.btn-primary{
+    margin-top:5px;
+    background-color:#01288a;
+    
+}

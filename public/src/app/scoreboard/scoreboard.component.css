@@ -1,0 +1,45 @@
+#wholeboard{
+    height:100%;
+    width:100%;
+}
+
+#grapharea{
+    display:inline-block;
+    overflow: hidden;
+    height:100%;
+    width:70%;
+}
+
+.table-dark{
+    background-color: #1b2130;
+}
+
+#scoreboard{
+    display:inline-block;
+    overflow:auto;
+    height:100%;
+    width:30%;
+}
+
+#scoreboard table{
+    border: 2px solid #273865;
+}
+
+.line{
+    /*fill : none;*/
+    stroke : steelblue;
+    stroke-width: 2px;
+}
+
+.axisSteelBlue text{
+    fill : steelblue;
+}
+
+.axisSteelBlue line{
+    fill : green;
+}
+
+.axisRed text{
+    fill : red;
+}
+

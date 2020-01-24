@@ -1,0 +1,48 @@
+#sidebar{
+    height:90%;
+    width:20%;
+    display:inline-block;
+    vertical-align: top;
+    /*background-image:linear-gradient(to right, #f4b58a, #2d3750);*/
+    background-image: url("/../assets/img/sidebar_bookcase.jpg");
+    background-size: cover;
+    background-position: center;
+    border:1px solid #a13e13;
+}
+
+#sidebar h2, #sidebar  h6{
+    color:white;
+}
+
+#content{
+    height:90%;
+    width:80%;
+    display:inline-block;
+    border:1px solid #273865;
+}
+
+h2, h6{
+    color:#01288a;
+}
+
+.btn-primary{
+    margin-top:5px;
+    background-color:#01288a;
+}
+
+.green{
+    background-color:#0d8d0d;
+    border:2px solid lightgreen;
+}
+
+#info{
+    width:95%;
+    background-color:#1b2130;
+    padding:5px;
+    display:block;
+    margin:auto;
+    margin-top:5px;
+    text-align:center;
+    border-radius:10px;
+    border:2px solid #273865;
+}

@@ -1,0 +1,97 @@
+#quote_list{
+    height:100%;
+    width:100%;
+    max-height:800px;
+    display:inline-block;
+    vertical-align: top;
+    overflow: auto;
+}
+
+#table_buttons{
+    display:block;
+    margin:auto;
+    text-align:center;
+}
+
+.quote{
+    border-top:1px solid #454d55;
+    border-bottom:1px solid #454d55;
+    padding:5px;
+}
+
+.quote h5, h6, thead h4{
+    color:white;
+}
+
+.looking_glass{
+    width:5%;
+    height:100%;
+    display:inline-block;
+    margin:none;
+    vertical-align: top;
+}
+
+.quote_text{
+    width:70%;
+    display:inline-block;
+    margin:none;
+    vertical-align: top;
+}
+
+.quote_author{
+    width:25%;
+    display:inline-block;
+    margin:none;
+    vertical-align: top;
+    padding-left:5px;
+}
+
+.quote_author a{
+    padding-left:5px;
+}
+
+
+.iconbutton{
+    background:transparent;
+    outline:none;
+    border:none;
+}
+
+.icon{
+    max-width:25px;
+    max-height:25px;
+    display:inline-block;
+}
+
+.btn-primary{
+    background-color:#01288a;
+}
+
+.green{
+    background-color:#0d8d0d;
+    border: 2px solid lightgreen;
+}
+
+.button-label{
+    margin:0;
+}
+
+/* width 
+::-webkit-scrollbar {
+    width: 10px;
+  }
+  
+/* Track 
+::-webkit-scrollbar-track {
+background: #f1f1f1; 
+}
+
+/* Handle 
+::-webkit-scrollbar-thumb {
+background: #888; 
+}
+
+/* Handle on hover 
+::-webkit-scrollbar-thumb:hover {
+background: #555; 
+}*/

@@ -1,0 +1,67 @@
+<div id = "quote_list" class = "border">
+
+    <div id = "table_buttons">
+
+        <button id = "favorite_button" (click) = "toggleFavoritesOnly()" class = "btn-primary">
+            <p class = "button-label" *ngIf = "favorites_only">Favorites Only</p>
+            <p class = "button-label" *ngIf = "!favorites_only">All Quotes</p>
+        </button>
+        <button id = "age_button" (click) = "toggleHistoricalOrder()" class = "btn-primary">
+            <p class = "button-label" *ngIf = "oldest_first">Oldest First</p>
+            <p class = "button-label" *ngIf = "!oldest_first">Newest First</p>
+        </button>
+        <button id = "alphabetical_button" (click) = "toggleAlphabeticalOrder()" class = "btn-primary">
+            <p class = "button-label" *ngIf = "a_first">Last Name: A-Z</p>
+            <p class = "button-label" *ngIf = "!a_first">Last Name: Z-A</p>
+        </button>
+
+    </div>
+
+    <div *ngFor = "let quote of quotes_to_show">
+
+        <div *ngIf = "favorites_only">
+
+            <div *ngIf = "quote.is_favorite" class = "quote">
+
+                <div class = "looking_glass">
+                    <button class = "iconbutton" *ngIf = "quote.is_favorite" (click) = "favoriteQuoteToService(quote.id)"><img class = "icon" src = "assets/img/star_filled.png"></button>
+                    <button class = "iconbutton" *ngIf = "!quote.is_favorite" (click) = "favoriteQuoteToService(quote.id)"><img class = "icon" src = "assets/img/star_empty.png"></button>
+                </div>
+
+                <h6 class = "quote_text">
+                    {{quote.quote.quoteText}}
+                </h6>
+
+                <h6 class = "quote_author">- {{quote.quote.quoteAuthor}}
+                    <a *ngIf = "quote.quote.quoteAuthor == 'Unknown' || quote.quote.quoteAuthor.includes('proverb')" href = "https://www.google.com/search?q={{quote.quote.quoteText}}"><img class = "icon" src = "assets/img/mag_glass2.png"></a>
+                    <a *ngIf = "quote.quote.quoteAuthor != 'Unknown' && !quote.quote.quoteAuthor.includes('proverb')" href = "https://www.google.com/search?q={{quote.quote.quoteAuthor}}"><img class = "icon" src = "assets/img/mag_glass2.png"></a>
+                </h6>
+                
+            </div>
+
+        </div>
+
+        <div *ngIf = "!favorites_only" class = "quote">
+
+            <div class = "looking_glass">
+                <button class = "iconbutton" *ngIf = "quote.is_favorite" (click) = "favoriteQuoteToService(quote.id)"><img class = "icon" src = "assets/img/star_filled.png"></button>
+                <button class = "iconbutton" *ngIf = "!quote.is_favorite" (click) = "favoriteQuoteToService(quote.id)"><img class = "icon" src = "assets/img/star_empty.png"></button>
+            </div>
+
+            <h6 class = "quote_text">
+                {{quote.quote.quoteText}}
+            </h6>
+
+            <h6 class = "quote_author">- {{quote.quote.quoteAuthor}}
+                <a *ngIf = "quote.quote.quoteAuthor == 'Unknown' || quote.quote.quoteAuthor.includes('proverb')" href = "https://www.google.com/search?q={{quote.quote.quoteText}}"><img class = "icon" src = "assets/img/mag_glass2.png"></a>
+                <a *ngIf = "quote.quote.quoteAuthor != 'Unknown' && !quote.quote.quoteAuthor.includes('proverb')" href = "https://www.google.com/search?q={{quote.quote.quoteAuthor}}"><img class = "icon" src = "assets/img/mag_glass2.png"></a>
+            </h6>
+
+        </div>
+        
+    </div>
+
+</div>
+
+
+

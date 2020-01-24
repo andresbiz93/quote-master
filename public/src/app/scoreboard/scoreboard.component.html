@@ -1,0 +1,24 @@
+<div id = "wholeboard">
+    <div id = "grapharea">
+    </div>
+
+    <div id = "scoreboard">
+        <table class = "table table-dark">
+            <thead>
+                <tr>
+                    <th>WPM</th>
+                    <th>TPM</th>
+                    <th>Date</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor = "let d of data">
+                    <td>{{d.wpm}}</td>
+                    <td>{{d.tpm}}</td>
+                    <td>{{d.date.getMonth() + 1}}/{{d.date.getDate()}}/{{d.date.getFullYear()}}, {{d.date.getHours()}}:{{d.date.getMinutes()}}:{{d.date.getSeconds()}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+

@@ -1,0 +1,27 @@
+<div id = "sidebar">
+
+    <div id = "info">
+        <h2>Welcome, {{username}}</h2>
+        <button (click) = "logOutFromService()" class = "btn-primary">Logout</button>
+        
+        <h6>Average Words Per Minute: {{wpm_to_show}}</h6>
+        <h6>Average Typos Per Minute: {{tpm_to_show}}</h6>
+        <h6>Number of Quotes Found: {{quote_num_to_show}}</h6>
+        <h6>Completion: {{quote_completion_to_show}}%</h6>
+    
+        <button (click) = "play()" class = "btn-primary" id = "play_button">PLAY</button>
+        <button (click) = "quoteList()" class = "btn-primary green" id = "quote_button">See Quotes</button>
+        <button (click) = "scoreboard()" class = "btn-primary" id = "score_button">See Scores</button>
+    </div>
+
+</div>
+
+<div id = "content" *ngIf = "is_loaded">
+    <app-scoreboard *ngIf = "is_scoreboard" [child_scores] = "scores"></app-scoreboard>
+    <app-quote-list *ngIf = "is_quote_list" [child_quotes] = "quotes"></app-quote-list>
+    <app-play *ngIf = "is_play"
+        (prompt_reload) = "getPlayerInfo()">
+    </app-play>
+</div>
+
+

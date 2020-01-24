@@ -1,0 +1,139 @@
+#start_div{
+    position: relative;
+    left:32%;
+    top:35%;
+    background-color:#1b2130;
+    height:20%;
+    width:35%;
+    overflow: auto;
+    border-radius:10px;
+    border:2px solid #273865;
+}
+
+#start_div h5{
+    text-align:center;
+    padding:2px;
+    color:white;
+}
+
+#start_div button{
+    /*position: relative;
+    left:45%;
+    top:90%;*/
+    margin: auto;
+    display:block;
+}
+
+#end_div{
+    position: relative;
+    left:40%;
+    top:35%;
+    background-color: #1b2130;
+    height:20%;
+    width:20%;
+    overflow: auto;
+    border-radius:10px;
+    border:2px solid #273865;
+}
+
+#end_div h5{
+    text-align: center;
+    padding:2px;
+    color:white;
+}
+
+#end_div button{
+    /*position: relative;
+    left:45%;
+    top:80%;*/
+    margin:auto;
+    display:block;
+}
+
+#quote_text, #quote_author, .context{
+    color:white;
+    font-weight:bold;
+}
+
+.outer{
+    width:100%;
+    height:100%;
+}
+
+/*@keyframes gradient{
+    /*from{background-color:#2d3750;}
+    to{background-color:#1b2130;}*/
+
+    /*0% {background-image: radial-gradient(#2d3750, #293249, #20283a);}
+    20% {background-image: radial-gradient(#1d2333, #2d3750, #293249);}
+    40% {background-image: radial-gradient(#191e2e, #1d2333, #2d3750);}
+    60% {background-image: radial-gradient(#20283a, #191e2e, #1d2333);}
+    80% {background-image: radial-gradient(#293249, #20283a, #191e2e);}
+    100% {background-image: radial-gradient(#2d3750, #293249, #20283a);}
+
+    0%{background-position:0% 50%}
+    50%{background-position:100% 50%}
+    100%{background-position:0% 50%}
+}*/
+
+@-webkit-keyframes gradient {
+    0%{background-position:50% 0%;}
+    50%{background-position:50% 33%;}
+    100%{background-position:50% 66%;}
+}
+@-moz-keyframes gradient {
+    0%{background-position:50% 0%;}
+    50%{background-position:50% 33%;}
+    100%{background-position:50% 66%;}
+}
+@keyframes gradient {
+    0%{background-position:50% 0%;}
+    50%{background-position:50% 33%;}
+    100%{background-position:50% 66%;}
+}
+
+#game{
+    background: linear-gradient(0deg, #a13e13, #2d3750);
+    background-size: 400% 400%;
+    animation: gradient 60s ease infinite;
+    -webkit-animation: gradient 60s ease infinite;
+    -moz-animation: gradient 60s ease infinite;
+}
+
+#typo{
+    color:red;
+    font-weight:bold;
+}
+
+#incomplete{
+    color:orange;
+    font-weight:bold;
+}
+
+#target_area{
+    height:33%;
+    width:100%;
+    /*border:1px solid #273865;*/
+    padding:40px;
+}
+
+#input_area{
+    height:66%;
+    width:100%;
+    /*border:1px solid #273865;*/
+    padding:40px;
+}
+
+#user_input{
+    width:100%;
+    background-color:#2d3750;
+    border:1px solid #007bff;
+    font-size:24px;
+    font-weight:bold;
+    color:white;
+    resize:none;
+}
+
+.btn-primary{
+    background-color:#01288a;
+}

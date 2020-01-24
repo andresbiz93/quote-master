@@ -1,0 +1,50 @@
+<div *ngIf = "!game_start && !game_over" class = "outer">
+
+    <div id = "start_div">
+
+        <h5>How many quotes can you type in one minute? Press enter when you've finished a quote to load the next one.</h5>
+
+        <button class = "btn-primary" (click) = "getRandomQuotesFromService()">Start</button>
+
+    </div>
+
+</div>
+
+<div *ngIf = "game_start && !game_over" class = "outer" id = "game">
+
+    <div id = "target_area">
+        <h3 id = "quote_text" #quote_text>{{quote_to_show.quoteText}}</h3>
+        <h4 id = "quote_author"> - {{quote_to_show.quoteAuthor}}</h4>
+    </div>
+    
+    <div id = "input_area">
+            <input type = "text" id = "user_input" name = "user_input" [(ngModel)] = "user_input" (keyup) = "onKeyUp()" (keyup.enter) = "checkCompletion()" autofocus = "autofocus">
+    
+            <div *ngIf = "has_typo">
+                <p id = "typo">You must fix your typo!</p>
+            </div>
+    
+            <div *ngIf = "completion_error">
+                <p id = "incomplete">You must complete the quote!</p>
+            </div>
+    
+            <div>
+                <h4 class = "context">TIME: {{time_to_show.minutes}}:{{time_to_show.seconds}}</h4>
+                <h4 class = "context">Quotes completed: {{index - 1}}</h4>
+            </div>
+    </div>  
+
+</div>
+
+<div *ngIf = "game_over" class = "outer">
+
+    <div id = "end_div">
+
+        <h5>Quotes Completed: {{index - 1}}</h5>
+        <h5>Words Per Minute: {{final_wpm}}</h5>
+        <h5>Typos Per Minute: {{final_tpm}}</h5>
+        <button class = "btn-primary" (click) = "getRandomQuotesFromService()">Play Again</button>
+
+    </div>
+
+</div>

@@ -1,0 +1,61 @@
+<div class = "container-fluid">
+
+    <div class = "row">
+        
+        <div class = "col">
+
+            <img id = "bookshelves" src = "assets/img/bookshelves.jpg" alt = "bookshelves">
+
+        </div>
+
+        <div class = "col">
+
+            <div id = "input">
+
+                <div *ngIf = "error">
+                    <h5 class = "error" *ngFor = "let error of error_msg">{{error}}</h5>
+                </div>
+
+                <h2 id = "name">QuoteMaster</h2>
+
+                <h3 class = "title">Log In</h3>
+
+                <form class = "form-group" (submit) = "postLoginToService()" method = "post">
+
+                        <h4 class = "label">Username:</h4>
+                        <input class = "form-control" type = "text" name = "username" [(ngModel)] = "login_info.username">
+                    
+                        <h4 class = "label">Password:</h4>
+                        <input class = "form-control" type = "password" name = "password" [(ngModel)] = "login_info.password">
+                    
+                        <button type = "submit" class = "btn-primary">Log In</button>
+                    
+                </form>
+
+                <h3 class = "title">Register</h3>
+
+                <form class = "form-group" (submit) = "postRegistryToService()" method = "post">
+
+                        <h4 class = "label">Username:</h4>
+                        <input class = "form-control" type = "text" name = "username" [(ngModel)] = "new_user_info.username">
+                    
+                        <h4 class = "label">Password:</h4>
+                        <input class = "form-control" type = "password" name = "password" [(ngModel)] = "new_user_info.password">
+                    
+                        <h4 class = "label">Confirm Password:</h4>
+                        <input class = "form-control" type = "password" name = "password" [(ngModel)] = "new_user_info.conf_pw">
+                    
+                        <button type = "submit" class = "btn-primary">Register</button>
+                    
+                </form>
+
+            </div>
+
+        </div>
+
+    </div>
+    
+</div>
+
+
+
