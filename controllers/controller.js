@@ -168,7 +168,7 @@ module.exports = {
 
     random_quotes : function(req, res){
         //Want to find the quotes that the player has already completed, so that the ones we send back are all new
-        Player.findOne({_id : session.player_id})
+        Player.findOne({_id : req.session.player_id})
         .then(player_info => {
             console.log("SERVER PLYR INFO", player_info);
             var quotes = [];
@@ -211,14 +211,14 @@ module.exports = {
         var new_score = new Score();
         new_score.wpm = words_per_minute;
         new_score.tpm = typos_per_minute;
-        console.log("SESSION ID", session.player_id);
-        new_score.player_id = session.player_id;
+        console.log("SESSION ID", req.session.player_id);
+        new_score.player_id = req.session.player_id;
         console.log("NEW SCORE", new_score);
         new_score.save()
         .then(saved_score => {
             console.log("SAVED SCORE", saved_score);
             //adding the score to the associated player
-            Player.findOne({_id : session.player_id})
+            Player.findOne({_id : req.session.player_id})
             .then(found_player => {
                 var new_avg_wpm;
                 var new_avg_tpm;
@@ -242,7 +242,7 @@ module.exports = {
                 console.log("NEW AVG WPM", new_avg_wpm, "NEW AVG TPM", new_avg_tpm);
 
                 //Update player stats and push new score and completed quotes into respective arrays
-                Player.updateOne({_id : session.player_id}, {$push : {scores : saved_score, completed_quotes : {$each : quotes}}, avg_wpm : new_avg_wpm, avg_tpm : new_avg_tpm})
+                Player.updateOne({_id : req.session.player_id}, {$push : {scores : saved_score, completed_quotes : {$each : quotes}}, avg_wpm : new_avg_wpm, avg_tpm : new_avg_tpm})
                 .then(updated_player => {
                     res.json(updated_player);
                 })
@@ -263,7 +263,7 @@ module.exports = {
         console.log("ADD FAVORITE REQ", req.body.id);
         var index;
         //we find the player, and look through its quotes to find one with a matching id
-        Player.findOne({_id : session.player_id})
+        Player.findOne({_id : req.session.player_id})
         .then(found_player => {
             console.log("FOUND PLAYER QUOTES", found_player.completed_quotes);
             for(var i = 0; i < found_player.completed_quotes.length; i++){
