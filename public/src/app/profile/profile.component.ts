@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpService } from '../http.service';
 import { Router } from '@angular/router';
-import { $ } from 'protractor';
 
 @Component({
   selector: 'app-profile',
@@ -20,6 +19,7 @@ export class ProfileComponent implements OnInit {
   is_scoreboard : Boolean;
   is_play : Boolean;
   is_loaded : Boolean;
+  current_player : any;
 
   constructor(private _httpService : HttpService, private _router : Router) { }
 

@@ -1,7 +1,7 @@
 var Player = require("../models/player.js");
 var Score = require("../models/score.js");
 var bcrypt = require("bcrypt");
-var session = require("express-session");
+//var session = require("express-session");
 var fs = require("fs"),
     file_data = fs.readFileSync("./public/src/assets/Database-Quotes-JSON/quotes.json"),
     all_quotes = JSON.parse(file_data);
@@ -23,8 +23,8 @@ module.exports = {
                 bcrypt.compare(req.body.password, found_player.password)
                 .then(result => {
                     if(result){
-                        session.player_id = found_player._id;
-                        result = {player_id : session.player_id};
+                        req.session.player_id = found_player._id;
+                        result = {player_id : req.session.player_id};
                         res.json(result);
                     }
                     else{
@@ -43,21 +43,28 @@ module.exports = {
     },
 
     log_out : function(req, res){
-        session.player_id = false;
-        var result = {player_id : false};
-        res.json(result);
+        req.session.destroy((err) => {
+            if(err){
+                res.json(err);
+            }
+            else{
+                var result = {player_id : false};
+                res.json(result);
+            }
+        });
+        //req.session.player_id = false;
     },
 
     logged_player : function(req, res){
         var result = {player_id : false};
-        if(session.player_id){
-            result.player_id = session.player_id;
+        if(req.session.player_id){
+            result.player_id = req.session.player_id;
         }
         res.json(result);
     },
 
     player_info : function(req, res){
-        Player.findOne({_id : session.player_id})
+        Player.findOne({_id : req.session.player_id})
         .then(found_player => {
             console.log("PLYR INFO FROM DB", found_player);
             //Grabbing info from the player instance to send back
@@ -137,9 +144,9 @@ module.exports = {
                     new_player.admin = false;
                     new_player.save()
                     .then(saved_player => {
-                        session.player_id = saved_player._id;
-                        console.log("Creating session with ID", session.player_id);
-                        result = {player_id : session.player_id};
+                        req.session.player_id = saved_player._id;
+                        console.log("Creating session with ID", req.session.player_id);
+                        result = {player_id : req.session.player_id};
                         res.json(result);
                     })
                     .catch(err => {
