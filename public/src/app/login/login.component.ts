@@ -24,12 +24,14 @@ export class LoginComponent implements OnInit {
     let observable = this._httpService.postLogin(this.login_info);
     observable.subscribe(data => {
       console.log("LOGIN INFO RETURN", data);
+      //if we get errors back, stay on login screen and display error msg
       if("errors" in data){
         if("not_found" || "wrong_pw" in data["errors"]){
           this.error = true;
           this.error_msg = ["Login Information is Not Valid"];
         }
       }
+      //if no errors, redirect to player profile
       else{
         console.log("LOGIN SUCCESS");
         this.error = false;
@@ -42,6 +44,7 @@ export class LoginComponent implements OnInit {
     let observable = this._httpService.postRegistry(this.new_user_info);
     observable.subscribe(data => {
       console.log("REGISTRY INFO RETURN", data);
+      //if validation errors are returned, display the corresponding error message
       if("errors" in data){
         if("mismatch" in data["errors"]){
           this.error = true;
@@ -56,6 +59,7 @@ export class LoginComponent implements OnInit {
           this.error_msg = ["The username and password must be at least 5 characters long."]
         }
       }
+      //if no validation errors, reroute to user profile
       else{
         console.log("REGISTRY SUCCESS");
         this.error = false;

@@ -36,6 +36,7 @@ export class PlayComponent implements OnInit {
     let observable = this._httpService.getLoggedPlayer();
     observable.subscribe(data => {
       console.log("PROFILE ONINIT", data);
+      //if a player is not logged in, redirect to login page
       if(data["player_id"] == false){
         this._router.navigate(["/login"]);
       }
@@ -51,6 +52,7 @@ export class PlayComponent implements OnInit {
     let observable = this._httpService.getQuotes();
     observable.subscribe(data => {
       console.log("QUOTES", data["quotes"]);
+      //separating the quote author and text from the quote indexes as they relate to the master list
       this.quotes = data["quotes"];
       this.master_indexes = data["indexes"];
       console.log("MASTER INDEXES", this.master_indexes);
@@ -61,6 +63,7 @@ export class PlayComponent implements OnInit {
       this.typo_counter = 0;
       this.has_typo = false;
       this.completion_error = false;
+      //timer will be one minute
       this.total_time = 1;
       this.final_wpm = 0;
       this.final_tpm = 0;
@@ -74,9 +77,11 @@ export class PlayComponent implements OnInit {
     if(this.user_input == this.quote_to_show.quoteText){
       console.log("USER INPUT MATCHES");
       this.completion_error = false;
+      //loads next quote
       this.showNextQuote();
     }
     else{
+      //displays an error on game screen
       console.log("USER INPUT DOES NOT MATCH");
       this.completion_error = true;
     }
@@ -86,17 +91,20 @@ export class PlayComponent implements OnInit {
   showNextQuote(){
     if(this.index < this.quotes.length){
       if(this.index > 0){
-        //var wordarr = this.quotes[this.index - 1].quoteText.split(" ");
-        //this.word_counter += wordarr.length;
+        //adds the total number of characters in the previous (completed) quote's text to the total character counter
         this.character_counter += this.quotes[this.index - 1].quoteText.length;
-        console.log("char counter ", this.character_counter, "quote length: ", this.quotes[this.index - 1].quoteText.length);
       }
+
+      //shows the new quote on screen
       this.quote_to_show = this.quotes[this.index];
       var target = document.getElementById("quote_text");
       if(target){
+        //displays the quote text
         target.textContent = this.quote_to_show.quoteText;
       }
+      //moves the index for the next quote by one
       this.index += 1;
+      //resets player input to blank
       this.user_input = "";
     }
     else{
@@ -107,7 +115,6 @@ export class PlayComponent implements OnInit {
   //Every time that the user presses and lifts off a key, check whether it matches the quote so far
   onKeyUp(){
     var in_length = this.user_input.length;
-    //console.log("VALUE OF TARGET QUOTE TEXT", this.target_quote.nativeElement.innerHTML);
     var comparison_string = "";
 
     //Want to have an input to begin with if we're gonna check it against the quote
@@ -121,18 +128,19 @@ export class PlayComponent implements OnInit {
         this.has_typo = true;
       }
       else{
-        //we only add to the typo warning once the input re-matches the quote. This is to not double-count a set of typos 
+        //we only add to the typo counter once the user input re-matches the quote. This is to not double-count a set of typos/fatfingering
         if(this.has_typo){
           this.typo_counter++;
         }
         this.has_typo = false;
         
-        //we modify the target element to remove portions of the quote that are already completed.
+        //we modify the target element to remove portions of the quote that are already completed - only the part of the quote that remains to be typed is displayed
         var to_edit = document.getElementById("quote_text");
         to_edit.textContent = this.quote_to_show.quoteText.substring(in_length, this.quote_to_show.quoteText.length);
       }
     }
     else{
+      //if the player cleared the input box and there was a typo flag active, want to incr typo counter and reset typo flag to false
       if(this.has_typo){
         this.typo_counter++;
       }
@@ -170,22 +178,6 @@ export class PlayComponent implements OnInit {
     var last_input = this.user_input;
     var quote_text = this.quote_to_show.quoteText;
 
-    /*var input_arr = last_input.split(" ");
-    var quote_arr = quote_text.split(" ");
-
-    //If the typed words are correct, they should count towards WPM
-
-    for(var i = 0; i < quote_arr.length; i++){
-      if(i > input_arr.length - 1){
-        break
-      }
-      else{
-        if(input_arr[i] == quote_arr[i]){
-          this.word_counter++;
-        }
-      }
-    }*/
-
     //If the typed characters are correct, they should count towards WPM
 
     for(var i = 0; i < quote_text.length; i++){
@@ -198,8 +190,6 @@ export class PlayComponent implements OnInit {
         }
       }
     }
-
-    console.log("POST gameover character counter", this.character_counter);
 
     //End timer subscription and reset input to blank
     this.timer.unsubscribe();
@@ -219,10 +209,6 @@ export class PlayComponent implements OnInit {
     this.final_wpm = wpm;
     this.final_tpm = tpm;
 
-    console.log("WPM", wpm);
-    console.log("Number of typos", this.typo_counter);
-    console.log("TPM", tpm);
-
     //get the quotes that the player completed
     var completed_quote_indexes = [];
     if(this.index > 0){
@@ -235,6 +221,7 @@ export class PlayComponent implements OnInit {
     let observable = this._httpService.postScore(score);
     observable.subscribe(data => {
       console.log("SERVER RESPONSE TO SCORE", data);
+      //emitting to profile component so that it reloads player data - this will update the avg wpm/tpm, completed quotes, scores, graph
       this.prompt_reload.emit();
       this.game_over = true;
       this.game_start = false;

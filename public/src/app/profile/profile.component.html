@@ -16,6 +16,7 @@
 
 </div>
 
+<!-- Want to pass user info to child components and display one component depending on selected option -->
 <div id = "content" *ngIf = "is_loaded">
     <app-scoreboard *ngIf = "is_scoreboard" [child_scores] = "scores"></app-scoreboard>
     <app-quote-list *ngIf = "is_quote_list" [child_quotes] = "quotes"></app-quote-list>

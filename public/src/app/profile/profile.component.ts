@@ -24,10 +24,13 @@ export class ProfileComponent implements OnInit {
   constructor(private _httpService : HttpService, private _router : Router) { }
 
   ngOnInit() {
+    //boolean vars to determine which component to display
     this.is_quote_list = true;
     this.is_scoreboard = false;
     this.is_play = false;
     this.is_loaded = false;
+    
+    //redirect to login screen if a player is not logged on
     let observable = this._httpService.getLoggedPlayer();
     observable.subscribe(data => {
       console.log("PROFILE ONINIT", data);
@@ -35,13 +38,10 @@ export class ProfileComponent implements OnInit {
         this._router.navigate(["/login"]);
       }
       else{
+        //get completed quotes and scores
         this.getPlayerInfo();
       }
     })
-  }
-
-  printParent(){
-    console.log(this.quotes);
   }
 
   getPlayerInfo(){
@@ -54,12 +54,14 @@ export class ProfileComponent implements OnInit {
       this.quote_num_to_show = this.quotes.length;
       this.quote_completion_to_show = ((this.quote_num_to_show/1636) * 100).toFixed(1);
       this.scores = data["scores"];
+      //rounding
       this.wpm_to_show = data["avg_wpm"].toFixed(1);
       this.tpm_to_show = data["avg_tpm"].toFixed(1);
       this.is_loaded = true;
     })
   }
 
+  //log player out
   logOutFromService(){
     let observable = this._httpService.logOut();
     observable.subscribe(data =>{
@@ -67,6 +69,7 @@ export class ProfileComponent implements OnInit {
     })
   }
 
+  //Set boolean variable for chosen option, deselect other options, render selected button as special
   play(){
     if(this.is_quote_list){
       this.is_quote_list = false;
@@ -81,6 +84,7 @@ export class ProfileComponent implements OnInit {
     document.getElementById("play_button").setAttribute("class", "btn-primary green");
   }
 
+  //Set boolean variable for chosen option, deselect other options, render selected button as special
   quoteList(){
     if(this.is_play){
       this.is_play = false;
@@ -95,6 +99,7 @@ export class ProfileComponent implements OnInit {
     document.getElementById("quote_button").setAttribute("class", "btn-primary green");
   }
 
+    //Set boolean variable for chosen option, deselect other options, render selected button as special
   scoreboard(){
     if(this.is_play){
       this.is_play = false;

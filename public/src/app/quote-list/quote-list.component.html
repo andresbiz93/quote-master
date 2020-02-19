@@ -19,11 +19,13 @@
 
     <div *ngFor = "let quote of quotes_to_show">
 
+        <!-- if favorites_only, want to only display quotes that are favorited -->
         <div *ngIf = "favorites_only">
 
             <div *ngIf = "quote.is_favorite" class = "quote">
 
                 <div class = "looking_glass">
+                    <!-- toggle the filled/empty star image depending on whether the current quote is a favorite or not -->
                     <button class = "iconbutton" *ngIf = "quote.is_favorite" (click) = "favoriteQuoteToService(quote.id)"><img class = "icon" src = "assets/img/star_filled.png"></button>
                     <button class = "iconbutton" *ngIf = "!quote.is_favorite" (click) = "favoriteQuoteToService(quote.id)"><img class = "icon" src = "assets/img/star_empty.png"></button>
                 </div>
@@ -33,6 +35,7 @@
                 </h6>
 
                 <h6 class = "quote_author">- {{quote.quote.quoteAuthor}}
+                    <!-- If quoteAuthor is 'Unknown' or other special cases, we want the looking glass to begin a google search for the quote body. Otherwise, google the author. -->
                     <a *ngIf = "quote.quote.quoteAuthor == 'Unknown' || quote.quote.quoteAuthor.includes('proverb')" href = "https://www.google.com/search?q={{quote.quote.quoteText}}"><img class = "icon" src = "assets/img/mag_glass2.png"></a>
                     <a *ngIf = "quote.quote.quoteAuthor != 'Unknown' && !quote.quote.quoteAuthor.includes('proverb')" href = "https://www.google.com/search?q={{quote.quote.quoteAuthor}}"><img class = "icon" src = "assets/img/mag_glass2.png"></a>
                 </h6>

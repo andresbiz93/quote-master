@@ -15,6 +15,7 @@ export class AppComponent {
   ngOnInit(){
     let observable = this._httpService.getLoggedPlayer();
     observable.subscribe(data => {
+      //if session has a player_id stored, proceed to user profile. otherwise reroute to login page
       if(data["player_id"] == false){
         this._router.navigate(["/login"]);
       }
@@ -24,30 +25,14 @@ export class AppComponent {
     });
   }
 
+  //reroutes to play component
   goToPlay(){
     this._router.navigate(["/play"]);
-    /*let observable = this._httpService.getLoggedPlayer();
-    observable.subscribe(data => {
-      if(data["player_id"] == false){
-        this._router.navigate(["/login"]);
-      }
-      else{
-        this._router.navigate(["/play"]);
-      }
-    });*/
   }
 
+  //reroutes to profile component
   goToProfile(){
     this._router.navigate(["/my_profile"]);
-    /*let observable = this._httpService.getLoggedPlayer();
-    observable.subscribe(data => {
-      if(data["player_id"] == false){
-        this._router.navigate(["/login"]);
-      }
-      else{
-        this._router.navigate(["/my_profile"]);
-      }
-    });*/
   }
 
 }

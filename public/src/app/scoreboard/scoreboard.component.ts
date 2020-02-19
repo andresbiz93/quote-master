@@ -17,6 +17,7 @@ export class ScoreboardComponent implements OnInit {
     //Breaking down the child_scores info into a set of data points for the graph. Only need wpm, tpm, date.
     for(var i = 0; i < this.child_scores.length; i++){
       var new_date = new Date(this.child_scores[i]["createdAt"]);
+      //each data entry to be graphed will consist of a wpm, tpm, and date
       this.data.push({
         "wpm" : this.child_scores[i]["wpm"], 
         "tpm" : this.child_scores[i]["tpm"],
@@ -30,12 +31,6 @@ export class ScoreboardComponent implements OnInit {
 
     //Selecting the grapharea div
     var graph_area = document.getElementById("grapharea");
-
-    console.log("HEIGHT", graph_area.offsetHeight);
-
-    console.log("WIDTH", graph_area.offsetWidth);
-
-    console.log("GRAPH AREA INFO", graph_area);
 
     //Setting a margin for the graph - the graph title and axis labels will be written within the margins
     var margin = {top : 20, right: 50, bottom: 50, left:50},
@@ -122,7 +117,7 @@ export class ScoreboardComponent implements OnInit {
       .style("text-anchor", "middle")
       .text(xLabel);
 
-    //due to the -90 degree rotation, the effect of changing the x and y attributes is swapped. 
+    //due to the -90 degree rotation of the y0 axis, the effect of changing the x and y attributes is swapped. 
     svg.append("text")
       .attr("transform", "rotate(-90)")
       //changing the x attribute moves the label up and down the axis

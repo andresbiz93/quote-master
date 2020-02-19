@@ -20,13 +20,16 @@ module.exports = {
                 res.json(error);
             }
             else{
+                //Use bcrypt to compare hashed password and user-inputted password
                 bcrypt.compare(req.body.password, found_player.password)
                 .then(result => {
+                    //If they match, store the player id within session
                     if(result){
                         req.session.player_id = found_player._id;
                         result = {player_id : req.session.player_id};
                         res.json(result);
                     }
+                    //If not, flash an error on the login page
                     else{
                         error = {errors : {wrong_pw : "Password does not match"}};
                         res.json(error);
@@ -43,19 +46,21 @@ module.exports = {
     },
 
     log_out : function(req, res){
+        //Destroy the data within session
         req.session.destroy((err) => {
             if(err){
                 res.json(err);
             }
             else{
+                //If destroyed without errors, return an empty player id
                 var result = {player_id : false};
                 res.json(result);
             }
         });
-        //req.session.player_id = false;
     },
 
     logged_player : function(req, res){
+        //check if session currently has a player_id stored
         var result = {player_id : false};
         if(req.session.player_id){
             result.player_id = req.session.player_id;

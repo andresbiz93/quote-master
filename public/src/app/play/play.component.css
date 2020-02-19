@@ -17,9 +17,6 @@
 }
 
 #start_div button{
-    /*position: relative;
-    left:45%;
-    top:90%;*/
     margin: auto;
     display:block;
 }
@@ -43,9 +40,6 @@
 }
 
 #end_div button{
-    /*position: relative;
-    left:45%;
-    top:80%;*/
     margin:auto;
     display:block;
 }
@@ -60,22 +54,9 @@
     height:100%;
 }
 
-/*@keyframes gradient{
-    /*from{background-color:#2d3750;}
-    to{background-color:#1b2130;}*/
+/* these keyframes animate the transition from a blue background to a orange-ish background */
 
-    /*0% {background-image: radial-gradient(#2d3750, #293249, #20283a);}
-    20% {background-image: radial-gradient(#1d2333, #2d3750, #293249);}
-    40% {background-image: radial-gradient(#191e2e, #1d2333, #2d3750);}
-    60% {background-image: radial-gradient(#20283a, #191e2e, #1d2333);}
-    80% {background-image: radial-gradient(#293249, #20283a, #191e2e);}
-    100% {background-image: radial-gradient(#2d3750, #293249, #20283a);}
-
-    0%{background-position:0% 50%}
-    50%{background-position:100% 50%}
-    100%{background-position:0% 50%}
-}*/
-
+/* the background is shifted starting from the blue area of the gradient to the orange area of the gradient */
 @-webkit-keyframes gradient {
     0%{background-position:50% 0%;}
     50%{background-position:50% 33%;}
